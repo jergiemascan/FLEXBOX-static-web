@@ -1,0 +1,123 @@
+
+:root{      /*Global parent elements accessable to all child elements.*/
+            /*CSSvariable instead of sass*/
+    --primary:#eb2f64;
+    --primary-light: #FF3366;
+    --primary-dark: #BA265D;
+
+    --grey-light1: #faf9f9;
+    --grey-light2: #f4f2f2;
+    --grey-light3: #f0eeee;
+    --grey-light4: #ccc;
+
+   --grey-dark1: #333;
+   --grey-dark2: #777;
+   --grey-dark3: #999;
+   --line-bottom: 1px solid var(--grey-light2);
+
+   --shadow-dark:0 2rem 6rem rgba(0,0,0,.3);
+   --shadow-light:0 1rem 2rem rgba(0,0,0,.2);
+//aligning flexitems side by side and centered//
+    --display: flex;
+    --justify-content: center;
+    --align-items: center;
+
+    //Transition with different settings//
+    --transition: transform .2s,
+                width .4s .2s,/*.2s delay*/
+                background-color .1s;
+}
+//Media Queries Declaration//
+
+$bp-largest:75em;//1200px/16em;
+$bp-large:68.57em;//1100px;
+$bp-medium:56.25em;//900px;
+$bp-small:37.5em;//600px/16em;
+$bp-smallest:31.25em;//500px/16em;
+
+
+                 /*MEDIA QUERY MANAGER*/
+
+/*
+0-600px: phone
+600-900px: tablet portrait mode
+900-1200px: tablet landscape
+(1200-1800): is where ou normal styles apply
+1800-up ++: Big desktop
+
+$breakpoint argument choices:
+-phone
+-tab-port
+-tab-land
+-big-desktop
+
+EM is the best unit to use in the media query for diff. websites purposes
+1em = 16px
+
+
+@mixin respond($breakpoint) {
+    @if $breakpoint == phone{
+        @media only screen and (max-width:37.5em) {@content};/*600px
+    }
+  /*  @if $breakpoint == tab-port{
+        @media only screen and (max-width:56.25em) {@content};/*900px
+    }
+  /*  @if $breakpoint == tab-land{
+        @media only screen and (max-width:75em) {@content};/*1200px
+    }
+ /*   @if $breakpoint == big-desktop{
+        @media only screen and (min-width:112.5em) {@content};/*1800px*/
+    
+
+
+*{
+    margin: 0;
+    padding: 0; 
+}
+ 
+*,
+*::before,
+*::after{
+    box-sizing: inherit;
+}
+
+html{
+    box-sizing: border-box;
+    font-size: 62.5%;/*1 rem=10px, 10px/16(browser defaut=62.5%*/
+
+    @media only screen and (max-width: $bp-large){ //1100px;
+        font-size: 50%; //decrease px to 8=8/16=50%
+    }
+}
+body{
+    
+    font-family: 'Open Sans','Sans-serif';
+    font-weight: 400;
+    line-height:1.6 ;
+    color: var(--grey-dark2);
+    background-image: linear-gradient(to right bottom, var(--primary-light), var(--primary-dark));
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+
+    @media only screen and ($bp-large){//1100px;
+        margin-bottom: 0;
+    }
+}
+
+//MEDIA QUERIES//
+
+/*
+
+900px-1200px =(tab-land)
+
+600px-900px =(tab-port)
+
+max-width(600px) =(phone)
+
+
+
+*/
+
+
+

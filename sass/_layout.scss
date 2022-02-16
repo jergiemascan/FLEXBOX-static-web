@@ -1,0 +1,121 @@
+
+.container{
+    max-width: 120rem;/*1200px*/
+    margin: 8rem auto;
+    background-color: var(--grey-light2);
+    box-shadow: var(--shadow-dark);
+    min-height: 50rem;
+
+   @media only screen and (max-width: $bp-largest){//1200px;
+
+      margin:0;
+      max-width: 100%;/*para ang space ma occupy kay migamay na ang content tpos dako pa ang bg*/
+      width: 100%;
+      
+   }
+}
+.header{
+font-size: 1.4rem;
+height: 7rem;
+background-color: #fff;
+border-bottom: 1px solid var(--grey-light2);
+
+display: flex;/*ang logo, search ug usernav side by side*/
+justify-content: space-between;/*ang space nila hati sila*/
+align-items: center;/*margin sa top and bottom cross axis*/
+
+    @media only screen and (max-width:$bp-smallest){
+        
+        flex-wrap: wrap;/*muanaog ang search ug naa sya sariling line kay ang .search naka  order 1 na(last item in order)*/
+        height: 11rem;
+        align-content: space-around;
+}
+}
+
+.content {
+  display: flex;/*para side by side ang side bar ug hotelview item i flex nimo sya,ang content mao ang container sa duha.*/
+
+     @media only screen and (max-width:$bp-medium){
+
+       flex-direction: column; /*dli na sya separate sa left side but block na sya*/
+
+    }
+
+}
+
+.sidebar{/*left side nav*/
+    background-color: var(--grey-dark1);
+    flex:0 0 18%;/*0(not to grow), 0(shrink), 18%(basis)is always keeps its perfect width i choose for sidebar nav*/
+    
+    /*for the footer to be centered(display:flex) and push all the way down (justify content:space-between)*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+.hotel-view{/*right side*/
+    background-color: #fff; 
+    flex:1; /*the element hotel-view grows as much as it can,occupy all space. 100-18%(sidbarnav)=82%*/
+    border-bottom: 1px solid var(--grey-light2);
+
+}
+
+.detail{
+    font-size: 1.4rem;
+    display: flex;
+    padding: 4.5rem;
+    background-color: var(--grey-light1);
+    border-bottom:var(--line-bottom);
+
+    @media only screen and (max-width:$bp-medium){
+
+       padding: 2rem;
+
+    }
+    @media only screen and (max-width:$bp-small){
+
+      
+        flex-direction: column;/*one screen na tanan dli side by side*/
+       
+     }
+}
+
+.description{
+    font-size: 1.4rem;
+    padding:3rem;
+    flex: 0 0 60%;
+    margin-right: 4.5rem;
+    background-color: #fff;
+    box-shadow: 0 2rem 5rem rgba(0,0,0,.06);
+
+    @media only screen and (max-width:$bp-medium){
+
+        padding: 2rem;
+        margin-right: 2rem;
+   
+      }
+      
+    @media only screen and (max-width:$bp-small){
+
+        margin-right: 0;
+        margin-bottom: 2rem;
+ 
+     }
+}
+
+.user-reviews{
+
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+   
+}
+
+
+
+
+
+
+

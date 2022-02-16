@@ -1,0 +1,646 @@
+:root {
+  /*Global parent elements accessable to all child elements.*/
+  /*CSSvariable instead of sass*/
+  --primary:#eb2f64;
+  --primary-light: #FF3366;
+  --primary-dark: #BA265D;
+  --grey-light1: #faf9f9;
+  --grey-light2: #f4f2f2;
+  --grey-light3: #f0eeee;
+  --grey-light4: #ccc;
+  --grey-dark1: #333;
+  --grey-dark2: #777;
+  --grey-dark3: #999;
+  --line-bottom: 1px solid var(--grey-light2);
+  --shadow-dark:0 2rem 6rem rgba(0,0,0,.3);
+  --shadow-light:0 1rem 2rem rgba(0,0,0,.2);
+  --display: flex;
+  --justify-content: center;
+  --align-items: center;
+  --transition: transform .2s,
+                width .4s .2s,/*.2s delay*/
+                background-color .1s; }
+
+/*MEDIA QUERY MANAGER*/
+/*
+0-600px: phone
+600-900px: tablet portrait mode
+900-1200px: tablet landscape
+(1200-1800): is where ou normal styles apply
+1800-up ++: Big desktop
+
+$breakpoint argument choices:
+-phone
+-tab-port
+-tab-land
+-big-desktop
+
+EM is the best unit to use in the media query for diff. websites purposes
+1em = 16px
+
+
+@mixin respond($breakpoint) {
+    @if $breakpoint == phone{
+        @media only screen and (max-width:37.5em) {@content};/*600px
+    }
+  /*  @if $breakpoint == tab-port{
+        @media only screen and (max-width:56.25em) {@content};/*900px
+    }
+  /*  @if $breakpoint == tab-land{
+        @media only screen and (max-width:75em) {@content};/*1200px
+    }
+ /*   @if $breakpoint == big-desktop{
+        @media only screen and (min-width:112.5em) {@content};/*1800px*/
+* {
+  margin: 0;
+  padding: 0; }
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit; }
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  /*1 rem=10px, 10px/16(browser defaut=62.5%*/ }
+  @media only screen and (max-width: 68.57em) {
+    html {
+      font-size: 50%; } }
+
+body {
+  font-family: 'Open Sans','Sans-serif';
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--grey-dark2);
+  background-image: linear-gradient(to right bottom, var(--primary-light), var(--primary-dark));
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh; }
+  @media only screen and (68.57em) {
+    body {
+      margin-bottom: 0; } }
+
+/*
+
+900px-1200px =(tab-land)
+
+600px-900px =(tab-port)
+
+max-width(600px) =(phone)
+
+
+
+*/
+.logo {
+  height: 3.25rem;
+  margin-left: 1.8rem; }
+
+.search {
+  flex: 0 0 40%;
+  /*anpassa sa screen dli modako dli mugamay permi lang ang width sa 40%*/
+  /*sa search flex items settings para matunga sya*/
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  @media only screen and (max-width: 31.25em) {
+    .search {
+      order: 1;
+      flex: 0 0 100%;
+      background-color: var(--grey-light2); } }
+  .search__input {
+    font-family: inherit;
+    color: inherit;
+    font-size: inherit;
+    background-color: var(--grey-light2);
+    border: none;
+    padding: .7rem 2rem;
+    border-radius: 100px;
+    /*round edges of search*/
+    width: 90%;
+    transition: all .2s;
+    margin-right: -3.25rem; }
+    .search__input:focus {
+      /*pag i focus ang search engine sa mouse*/
+      width: 100%;
+      outline: none;
+      background-color: var(--grey-light3); }
+    .search__input::-webkit-input-placeholder {
+      /*text weight sa sulod sa search is lighter and bigger*/
+      font-weight: 100;
+      color: var(--grey-light4); }
+  .search__input:focus + .search__button {
+    /*pag i focus ang input tpos child element nya button same sila ug bg color.*/
+    background-color: var(--grey-light3); }
+  .search__button {
+    border: none;
+    background-color: var(--grey-light2); }
+    .search__button:focus {
+      outline: none;
+      /*gitanggal ang focus sa magnfying glass*/ }
+    .search__button:active {
+      /*when clicking it moves down*/
+      transform: translateY(2px); }
+  .search__icon {
+    height: 2rem;
+    width: 2rem;
+    fill: var(--grey-dark3); }
+
+.usernav {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  /*to make the bgcolor when hover stretch from top and buttom*/ }
+  .usernav > * {
+    /*selecting direct child elements inside the usernav to apply same margin in between.*/
+    padding: 0 2rem;
+    cursor: pointer;
+    height: 100%;
+    /* iconbox centered*/
+    display: flex;
+    align-items: center; }
+  .usernav > *:hover {
+    /*same here to hover*/
+    background-color: var(--grey-light2); }
+  .usernav__iconbox {
+    position: relative; }
+  .usernav__icon {
+    height: 2.25rem;
+    width: 2.25rem;
+    fill: var(--grey-dark2); }
+  .usernav__notification {
+    /*red circle*/
+    font-size: .8rem;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
+    background-color: var(--primary);
+    color: #fff;
+    position: absolute;
+    top: 2rem;
+    right: 1.5rem;
+    /*aligning the text(#) inside the red circle.*/
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+  .usernav__userphoto {
+    height: 3.75rem;
+    border-radius: 50%;
+    margin-right: 1rem; }
+
+.sidenav {
+  margin-top: 3.5rem;
+  font-size: 1.2rem; }
+  @media only screen and (max-width: 56.25em) {
+    .sidenav {
+      display: flex;
+      margin: 0; } }
+  .sidenav__item {
+    list-style: none;
+    position: relative; }
+    .sidenav__item:not(:last-child) {
+      margin-bottom: .5rem; }
+      @media only screen and (max-width: 56.25em) {
+        .sidenav__item:not(:last-child) {
+          margin-bottom: 0; } }
+    @media only screen and (max-width: 56.25em) {
+      .sidenav__item {
+        flex: 1;
+        /*para naay kanya2 space ang 4 ka flexitem sa left side to grow as much as they can*/ } }
+  .sidenav__item::before {
+    /*the effects it will show before the list item and grow to the right side */
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 3px;
+    background-color: var(--primary);
+    transform: scaleY(0);
+    transition: transform 0.2s, width 0.4s 0.2s;
+    /* .2s is the delay*/ }
+  .sidenav__item:hover::before, .sidenav__item--active::before {
+    /*ang active kay para permi sya naka highlight,unique id sa html pod*/
+    /* hovering before the text comes moexpand sya sa right*/
+    transform: scaleY(1);
+    width: 100%; }
+  .sidenav__item:active::before {
+    background-color: var(--primary-light);
+    /*brighter light when hovering*/ }
+    @media only screen and (max-width: 56.25em) {
+      .sidenav__item:active::before {
+        margin: 0; } }
+  .sidenav__link:link, .sidenav__link:visited {
+    color: var(--grey-light1);
+    text-decoration: none;
+    text-transform: uppercase;
+    display: block;
+    padding: 1.5rem 3rem;
+    /*para mo appear sa ibabaw ang text inig hover*/
+    position: relative;
+    z-index: 10;
+    /*para ma center ug align ang svg icon ug text sa span*/
+    display: flex;
+    text-align: center; }
+    @media only screen and (max-width: 56.25em) {
+      .sidenav__link:link, .sidenav__link:visited {
+        justify-content: center;
+        padding: 2rem; } }
+    @media only screen and (max-width: 37.5em) {
+      .sidenav__link:link, .sidenav__link:visited {
+        /*patung2 na tanan*/
+        flex-direction: column;
+        align-items: center;
+        padding: 1.5rem .5rem; } }
+  .sidenav__icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-right: 2rem;
+    fill: currentColor;
+    /*auto changes the color dependgn on the parents element color*/ }
+    @media only screen and (max-width: 37.5em) {
+      .sidenav__icon {
+        /*patung2 na tanan tpos centered*/
+        margin-right: 0;
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-bottom: .7rem; } }
+
+.legal {
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 2.5rem;
+  color: var(--grey-light4); }
+  @media only screen and (max-width: 56.25em) {
+    .legal {
+      display: none; } }
+
+.gallery {
+  display: flex; }
+  .gallery__photo {
+    width: 100%;
+    display: block; }
+
+.overview {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--grey-light2); }
+  .overview__heading {
+    font-size: 2.25rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 1.5rem 3rem; }
+    @media only screen and (max-width: 37.5em) {
+      .overview__heading {
+        /*patung2 na tanan tpos centered*/
+        font-size: 1.8rem;
+        padding: 1.2rem 2rem; } }
+  .overview__stars {
+    margin-right: auto;
+    /*dako na space sa right sa stars-albufeira instead na flex:1 */
+    display: flex;
+    /*para dikit2 mga stars ug ganid sya walay space*/ }
+  .overview__icon-stars {
+    margin: auto; }
+  .overview__icon-stars, .overview__icon-location {
+    width: 1.75rem;
+    height: 1.75rem;
+    fill: var(--primary); }
+  .overview__location {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center; }
+  .overview__icon-location {
+    margin-right: .5rem; }
+  .overview__rating {
+    background-color: var(--primary);
+    color: #fff;
+    margin-left: 3rem;
+    align-self: stretch;
+    padding: 0 2.5rem;
+    /*to center the rates and votes*/
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column; }
+    @media only screen and (max-width: 37.5em) {
+      .overview__rating {
+        padding: 0 1.5rem; } }
+  .overview__rating-average {
+    font-size: 2.25rem;
+    font-weight: 300;
+    margin-bottom: -3px; }
+    @media only screen and (max-width: 37.5em) {
+      .overview__rating-average {
+        font-size: 1.8rem; } }
+  .overview__votes {
+    font-size: .8rem;
+    text-transform: uppercase;
+    background-color: var(--primary);
+    color: #fff; }
+    @media only screen and (max-width: 37.5em) {
+      .overview__votes {
+        font-size: .5rem; } }
+
+.btn-inline {
+  border: none;
+  color: var(--primary);
+  font-size: inherit;
+  border-bottom: 1px solid currentColor;
+  /*same sa color ug color*/
+  display: inline-block;
+  background-color: transparent;
+  padding-bottom: 2px;
+  cursor: pointer;
+  transition: all .2s0; }
+  .btn-inline span {
+    margin-left: 3px;
+    transition: margin-left .2s; }
+  .btn-inline:hover {
+    color: var(--grey-dark1); }
+    .btn-inline:hover span {
+      margin-left: 8px;
+      /*when u hover the arrow looks bigger anfd pointing right*/ }
+  .btn-inline:focus {
+    outline: none;
+    animation: pulsate 1s infinite;
+    /*1second pabalik2 sya mag pulso pag clicked*/ }
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+    /*normal state*/
+    box-shadow: none; }
+  50% {
+    transform: scale(1.05);
+    /*then at 50% modako gamay*/
+    box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.25); }
+  100% {
+    transform: scale(1);
+    /*back to normal state*/
+    box-shadow: none; } }
+
+.paragraph:not(:last-of-type) {
+  /*2 Paraghps the last Para will not have a margin*/
+  margin-bottom: 2rem; }
+
+.list {
+  margin: 3rem 0;
+  list-style: none;
+  padding: 3rem 0;
+  border-top: var(--line-bottom);
+  border-bottom: var(--line-bottom);
+  display: flex;
+  flex-wrap: wrap; }
+  .list__item {
+    flex: 0 0 50%;
+    /*para 2 ka item sa isa ka line,100%/2=50%*/
+    margin-bottom: .7rem; }
+  .list__item::before {
+    /*adding svg to the css,always use before pseudo to make look good*/
+    content: "";
+    display: inline-block;
+    height: 1rem;
+    width: 1rem;
+    margin-right: .7rem;
+    /*using mask- in adopting bgcolor into SVG icons to change color in CSS*/
+    /*older browsers
+        background-image: url(../img/chevron-thin-right.svg);
+        background-size: cover;*/
+    background-color: var(--primary);
+    -webkit-mask-image: url(../img/chevron-thin-right.svg);
+    -webkit-mask-size: cover;
+    mask-image: url(../img/chevron-thin-right.svg);
+    mask-size: cover; }
+
+.recommend {
+  font-size: 1.3rem;
+  color: var(--grey-dark3);
+  display: flex;
+  align-items: center; }
+  @media only screen and (max-width: 37.5em) {
+    .recommend {
+      display: block; } }
+  .recommend__photos {
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-sizing: content-box; }
+    .recommend__photos:not(:last-child) {
+      /*para picts next to each other almost top*/
+      margin-right: -2rem; }
+    @media only screen and (max-width: 37.5em) {
+      .recommend__photos {
+        border: none;
+        padding: .9rem; } }
+  .recommend__count {
+    margin-right: auto; }
+    @media only screen and (max-width: 37.5em) {
+      .recommend__count {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1rem; } }
+  @media only screen and (max-width: 56.25em) {
+    .recommend__friends {
+      display: flex; } }
+  @media only screen and (max-width: 37.5em) {
+    .recommend__friends {
+      display: flex;
+      justify-content: center;
+      align-items: center; } }
+
+.review {
+  background-color: #fff;
+  box-shadow: var(--shadow-light);
+  padding: 3rem;
+  margin-bottom: 3.5rem;
+  position: relative;
+  overflow: hidden; }
+  @media only screen and (max-width: 56.25em) {
+    .review {
+      padding: 2rem;
+      margin-bottom: 3rem; } }
+  .review__user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem; }
+  .review__text {
+    position: relative;
+    z-index: 10; }
+  .review__photo {
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 50%;
+    margin-right: 1.5rem; }
+  .review__userbox {
+    margin-right: auto; }
+  .review__username {
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: .4rem; }
+  .review__date {
+    font-size: 1rem;
+    color: var(--grey-dark3); }
+  .review__rating {
+    color: var(--primary);
+    font-size: 2.2rem;
+    font-weight: 600; }
+  .review::before {
+    /*qoute before text*/
+    content: "\201C";
+    font-size: 20rem;
+    color: var(--grey-light2);
+    position: absolute;
+    z-index: 0;
+    top: -2.4rem;
+    left: -.5rem;
+    font-family: sans-serif;
+    line-height: 1; }
+
+.cta {
+  padding: 3.5rem 0;
+  text-align: center; }
+  @media only screen and (max-width: 56.25em) {
+    .cta {
+      padding: 2.5rem 0; } }
+  .cta__booknow {
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 2.5rem; }
+
+.btn {
+  background-image: linear-gradient(to right bottom, var(--primary-light), var(--primary-dark));
+  border-radius: 150px;
+  /*para pantay ang pagka round use px*/
+  border: none;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  /*to hide the 4 rooms left*/ }
+  .btn > * {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    transition: all .2s; }
+  .btn__visible {
+    padding: 2rem 7.5rem; }
+  .btn__invisible {
+    position: absolute;
+    left: 0;
+    top: -100%;
+    padding: 2rem 0; }
+  .btn:hover .btn__visible {
+    transform: translateY(100%);
+    /*moanug ang 4 rooms left*/ }
+  .btn:hover .btn__invisible {
+    top: 0;
+    /*mosaka ang book now*/
+    background-image: linear-gradient(to right bottom, var(--primary-dark), var(--primary-light)); }
+  .btn:focus {
+    outline: none;
+    animation: pulsate 1s infinite; }
+
+.container {
+  max-width: 120rem;
+  /*1200px*/
+  margin: 8rem auto;
+  background-color: var(--grey-light2);
+  box-shadow: var(--shadow-dark);
+  min-height: 50rem; }
+  @media only screen and (max-width: 75em) {
+    .container {
+      margin: 0;
+      max-width: 100%;
+      /*para ang space ma occupy kay migamay na ang content tpos dako pa ang bg*/
+      width: 100%; } }
+
+.header {
+  font-size: 1.4rem;
+  height: 7rem;
+  background-color: #fff;
+  border-bottom: 1px solid var(--grey-light2);
+  display: flex;
+  /*ang logo, search ug usernav side by side*/
+  justify-content: space-between;
+  /*ang space nila hati sila*/
+  align-items: center;
+  /*margin sa top and bottom cross axis*/ }
+  @media only screen and (max-width: 31.25em) {
+    .header {
+      flex-wrap: wrap;
+      /*muanaog ang search ug naa sya sariling line kay ang .search naka  order 1 na(last item in order)*/
+      height: 11rem;
+      align-content: space-around; } }
+
+.content {
+  display: flex;
+  /*para side by side ang side bar ug hotelview item i flex nimo sya,ang content mao ang container sa duha.*/ }
+  @media only screen and (max-width: 56.25em) {
+    .content {
+      flex-direction: column;
+      /*dli na sya separate sa left side but block na sya*/ } }
+
+.sidebar {
+  /*left side nav*/
+  background-color: var(--grey-dark1);
+  flex: 0 0 18%;
+  /*0(not to grow), 0(shrink), 18%(basis)is always keeps its perfect width i choose for sidebar nav*/
+  /*for the footer to be centered(display:flex) and push all the way down (justify content:space-between)*/
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+
+.hotel-view {
+  /*right side*/
+  background-color: #fff;
+  flex: 1;
+  /*the element hotel-view grows as much as it can,occupy all space. 100-18%(sidbarnav)=82%*/
+  border-bottom: 1px solid var(--grey-light2); }
+
+.detail {
+  font-size: 1.4rem;
+  display: flex;
+  padding: 4.5rem;
+  background-color: var(--grey-light1);
+  border-bottom: var(--line-bottom); }
+  @media only screen and (max-width: 56.25em) {
+    .detail {
+      padding: 2rem; } }
+  @media only screen and (max-width: 37.5em) {
+    .detail {
+      flex-direction: column;
+      /*one screen na tanan dli side by side*/ } }
+
+.description {
+  font-size: 1.4rem;
+  padding: 3rem;
+  flex: 0 0 60%;
+  margin-right: 4.5rem;
+  background-color: #fff;
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.06); }
+  @media only screen and (max-width: 56.25em) {
+    .description {
+      padding: 2rem;
+      margin-right: 2rem; } }
+  @media only screen and (max-width: 37.5em) {
+    .description {
+      margin-right: 0;
+      margin-bottom: 2rem; } }
+
+.user-reviews {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+@imp;
